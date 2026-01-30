@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thanh toán chuyển khoản</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 40px; }
+    img { width: 260px; margin: 20px 0; }
+    button { padding: 10px 20px; font-size: 16px; }
+  .back-home {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #ff4d6d;
+  font-weight: 500;
+}
+
+.back-home:hover {
+  text-decoration: underline;
+}
+
+  </style>
+</head>
+<body>
+
+<h2>Quét mã để thanh toán</h2>
+<p id="moneyText"></p>
+<a href="index.html" class="back-home">← Quay về trang chủ</a>
+<img id="qrCode">
+
+<p><b>Nội dung chuyển khoản:</b> <span id="ckText"></span></p>
+
+<button onclick="donePayment()">Tôi đã chuyển khoản</button>
+
+<script>
+let pendingOrder = JSON.parse(localStorage.getItem("pendingOrder"));
+
+if (!pendingOrder) {
+  document.body.innerHTML = "<h3>Không tìm thấy đơn hàng cần thanh toán.</h3>";
+  throw new Error("No pending order");
+}
+
+let amountNumber = pendingOrder.amountNumber; // số tiền dạng số
+let amountText = pendingOrder.total;          // số tiền dạng "240.000₫"
+let orderId = "DH" + Date.now();              // tạo mã đơn tạm
+
+let bank = "MB";
+let account = "0961870119";
+
+let addInfoText = "Thanh toan don " + orderId;
+let addInfo = encodeURIComponent(addInfoText);
+
+document.getElementById("ckText").innerText = addInfoText;
+document.getElementById("moneyText").innerText = "Số tiền cần chuyển: " + amountText;
+
+document.getElementById("qrCode").src =
+  `https://img.vietqr.io/image/${bank}-${account}-compact2.png?amount=${amountNumber}&addInfo=${addInfo}`;
+
+
+function donePayment() {
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+  orders.push({
+    id: orderId,
+    items: pendingOrder.items,
+    total: pendingOrder.total,
+    amountNumber: pendingOrder.amountNumber,
+    date: new Date().toLocaleString("vi-VN"),
+    payment: "bank",
+    status: "Đã thanh toán"
+  });
+
+  localStorage.setItem("orders", JSON.stringify(orders));
+
+  localStorage.removeItem("pendingOrder");
+  localStorage.removeItem("cart");
+  localStorage.removeItem("buyNow");
+
+  window.location.href = "camon.html";
+}
+</script>
+
+</body>
+</html>

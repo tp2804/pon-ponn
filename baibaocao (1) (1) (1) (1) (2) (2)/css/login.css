@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #488edf, #5c91f4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* khung ngoài */
+.wapper {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 35px 40px;
+  border-radius: 20px;
+  width: 420px;
+  border: 2px solid #000;
+}
+
+/* tiêu đề */
+.wapper-heading h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+/* mỗi ô input */
+.input_field {
+  margin-bottom: 18px;
+}
+
+/* input */
+.input_field input {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 15px;
+
+  border: 2px solid #000;      /* khung đen */
+  border-radius: 12px;
+
+  outline: none;
+  transition: 0.3s ease;
+}
+
+
+.input_field input:focus {
+  border-color: #6a5af9;
+  box-shadow: 0 0 0 3px rgba(106, 90, 249, 0.25);
+  background-color: #fff;
+}
+
+/* link đăng ký / đăng nhập */
+.login-link,
+.signup-link {
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #222;
+  text-decoration: none;
+}
+
+.login-link:hover,
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+/* nút bấm */
+.btn {
+  width: 100%;
+  padding: 13px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #6a5af9, #8f7cff);
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.back-to-home {
+    position: absolute;   /* Để nút nằm cố định so với trang */
+    top: 20px;            /* Cách mép trên 20px */
+    left: 20px;           /* Cách mép trái 20px */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #fff;          /* Màu chữ trắng */
+    background: rgba(255, 255, 255, 0.2); /* Nền mờ sang trọng */
+    padding: 8px 15px;
+    border: 5px solid #000;
+    border-radius: 12px;
+    font-size: 30px;
+    transition: all 0.3s ease;
+    z-index: 1000;        /* Đảm bảo nút luôn nằm trên cùng */
+}
+
+.back-to-home:hover {
+    background: #5c9cef;  /* Đổi sang màu vàng khi di chuột */
+    color: #000;
+}

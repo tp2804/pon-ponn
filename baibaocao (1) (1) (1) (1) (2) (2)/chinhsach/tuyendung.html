@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="chinhsach.css">
+</head>
+<body>
+    <div class="policy-container">
+
+    <h1>Tuyển Dụng</h1>
+
+    <h2>Vị trí tuyển dụng: Nhân viên</h2>
+
+    <h2>Mô tả công việc</h2>
+    <p>Chịu trách nhiệm các hoạt động bán hàng của cửa hàng, bao gồm khách hàng trực tiếp và khách hàng online.</p>
+    <p>Giới thiệu, tư vấn sản phẩm cho khách hàng.</p>
+    <p>Giải quyết thắc mắc, khiếu nại của khách hàng.</p>
+    <p>Quản lý thông tin khách hàng.</p>
+    <p>Thực hiện các chương trình chăm sóc khách hàng sau bán hàng.</p>
+    <p>Viết bài về sản phẩm, tư vấn mua hàng và đăng lên website, fanpage.</p>
+    <p>Sắp xếp, trưng bày hàng hóa, vệ sinh cửa hàng.</p>
+    <p>Thực hiện các báo cáo định kỳ, đột xuất.</p>
+    <p>Thực hiện các công việc khác theo chỉ đạo của Quản lý trực tiếp.</p>
+
+    <h2>Quyền lợi được hưởng</h2>
+    <p>Lương cạnh tranh, phù hợp với năng lực.</p>
+    <p>Được làm việc trong môi trường thân thiện, năng động, chuyên nghiệp.</p>
+    <p>Cơ hội được đào tạo và thăng tiến trong công việc.</p>
+
+    <h2>Yêu cầu vị trí</h2>
+    <p>Sạch sẽ, gọn gàng, nhanh nhẹn, chăm chỉ.</p>
+    <p>Thái độ cầu tiến, thân thiện, hòa đồng.</p>
+    <p>Có trách nhiệm và nhiệt huyết trong công việc.</p>
+    <p>Biết chơi nhạc cụ là một lợi thế.</p>
+
+    <h2>Liên hệ</h2>
+    <p>Ứng viên nộp hồ sơ trực tiếp tại: 1061B Cách Mạng Tháng 8, Phường 7, Tân Bình, TP.HCM</p>
+
+    <p>Hoặc nộp hồ sơ online qua:</p>
+    <p>Email: info@mainguyenmusic.vn</p>
+    <p>Hotline: 08.1900.3282</p>
+
+    <p>Công Ty Cổ Phần Âm Nhạc Mai Nguyên</p>
+
+</div>
+<div id="thanhdieuhuong"></div>
+
+<script>
+  fetch("thanhdieuhuong.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("thanhdieuhuong").innerHTML = html;
+    });
+</script>
+
+</body>
+</html>

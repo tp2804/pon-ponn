@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đặt hàng thành công</title>
+  <style>
+    body {font-family: Arial; text-align:center; padding-top:100px;}
+    h1 {color:#ff6b81;}
+  </style>
+</head>
+<body>
+  <h1>🎉 Đặt hàng thành công!</h1>
+  <p>Cảm ơn bạn đã mua sắm.</p>
+  <a href="index.html">Về trang chủ</a>
+  <a href="theodoi.html">Theo dõi đơn hàng</a>
+
+  <div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("footer").innerHTML = html;
+  });
+</script>
+</body>
+</html>

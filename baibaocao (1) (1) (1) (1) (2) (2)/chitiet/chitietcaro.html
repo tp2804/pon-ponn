@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chi tiết sản phẩm</title>
+  <link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/chitietsanpham.css">
+</head>
+<body>
+
+<a href="../index.html" class="back-home">← Quay về trang chủ</a>
+
+<div class="product-detail">
+
+  <!-- ẢNH SẢN PHẨM -->
+  <div class="product-images">
+    <img src="../IMAGES/phukien/guitar&ukulele/day_deo/Ernie_caro/caro_1.jpg" alt="Dây Đeo" class="main-img">
+  </div>
+
+  <!-- THÔNG TIN SẢN PHẨM -->
+  <div class="product-info">
+    <h1 class="product-title">
+     Dây Đeo Caro
+    </h1>
+
+    <div class="price-box">
+      <span class="old-price">500.000đ</span>
+      <span class="new-price">250.000đ</span>
+      <span class="discount">-50%</span>
+    </div>
+
+    <p class="description">
+    Phụ kiện kẹp cần đàn giúp tăng tông nhanh chóng mà không cần đổi thế bấm hợp âm. Thiết kế nhỏ gọn, lò xo chắc chắn, kẹp êm không làm rè dây hay trầy cần đàn, phù hợp cho cả guitar acoustic và electric.
+    </p>
+
+    <!-- VOUCHER -->
+    <div class="voucher-box">
+      <div class="voucher">Giảm 20K</div>
+      <div class="voucher">Giảm 25K</div>
+      <div class="voucher">Giảm 30K</div>
+    </div>
+
+    <!-- SỐ LƯỢNG -->
+    <div class="quantity">
+      <span>Số lượng:</span>
+      <button onclick="giam()">-</button>
+<input type="number" id="qty" value="1" min="1">
+<button onclick="tang()">+</button>
+
+    </div>
+
+   <!-- NÚT -->
+    <div class="action-buttons">
+
+      <!-- THÊM GIỎ -->
+      <button
+        onclick="addToCart(this)"
+        data-id="sp5"
+        data-name=" Dây Đeo Caro"
+        data-price="250000"
+        data-image="../IMAGES/phukien/guitar&ukulele/day_deo/Ernie_caro/caro_1.jpg">
+        Thêm vào giỏ
+      </button>
+
+      <!-- MUA NGAY -->
+      <button
+        class="buy-now"
+        onclick="buyNow(this)"
+        data-id="sp5"
+        data-name=" Dây Đeo Caro"
+        data-price="250000"
+        data-image="../IMAGES/phukien/guitar&ukulele/day_deo/Ernie_caro/caro_1.jpg">
+        Mua ngay
+      </button>
+
+    </div>
+
+  </div>
+</div>
+<div class="review-section">
+  <h3>Đánh giá sản phẩm</h3>
+
+  <!-- Điểm trung bình -->
+  <div class="review-summary">
+    <span id="avgRating">5.0</span> ★
+    <span id="totalReviews">(0 đánh giá)</span>
+  </div>
+
+  <!-- Danh sách đánh giá -->
+  <div id="reviewList"></div>
+
+  <!-- Form người dùng đánh giá -->
+  <div class="review-form">
+    <h4>Viết đánh giá của bạn</h4>
+    <input type="text" id="reviewName" placeholder="Tên của bạn">
+    
+    <select id="reviewRating">
+      <option value="5">5 ★</option>
+      <option value="4">4 ★</option>
+      <option value="3">3 ★</option>
+      <option value="2">2 ★</option>
+      <option value="1">1 ★</option>
+    </select>
+
+    <textarea id="reviewComment" placeholder="Cảm nhận của bạn về sản phẩm"></textarea>
+    <button onclick="addReview()">Gửi đánh giá</button>
+  </div>
+</div>
+
+<div id="footer"></div>
+<script>
+fetch("../footer.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("footer").innerHTML = html;
+  });
+</script>
+<script>
+function addToCart(btn){
+  const qty = Number(document.getElementById("qty").value);
+
+  const product = {
+    id: btn.dataset.id,
+    name: btn.dataset.name,
+    price: Number(btn.dataset.price),
+    oldPrice: Number(btn.dataset.oldprice),
+    image: btn.dataset.image,
+    quantity: qty
+  };
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const exist = cart.find(p => p.id === product.id);
+  if(exist){
+    exist.quantity += qty;
+  }else{
+    cart.push(product);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  window.location.href = "../cart.html";
+}
+
+function buyNow(btn){
+  const qty = Number(document.getElementById("qty").value);
+
+  const product = {
+    id: btn.dataset.id,
+    name: btn.dataset.name,
+    price: Number(btn.dataset.price),
+    oldPrice: Number(btn.dataset.oldprice),
+    image: btn.dataset.image,
+    quantity: qty
+  };
+
+  localStorage.setItem("buyNow", JSON.stringify(product));
+  window.location.href = "../thanhtoan.html";
+}
+function tang(){
+  const qtyInput = document.getElementById("qty");
+  qtyInput.value = parseInt(qtyInput.value || 1) + 1;
+}
+
+function giam(){
+  const qtyInput = document.getElementById("qty");
+  let val = parseInt(qtyInput.value || 1);
+  if(val > 1) qtyInput.value = val - 1;
+}
+</script>
+<script>
+const reviewKey = "caro_reviews"; // mỗi trang sản phẩm có thể đổi key khác nhau
+
+// Đánh giá giả ban đầu
+const defaultReviews = [
+  { user: "Minh Anh", rating: 5, comment: "Đàn đẹp hơn hình, âm thanh rất ấm", date: "2 ngày trước" },
+  { user: "Hoàng Phúc", rating: 4, comment: "Giao nhanh, mới tập chơi thấy ổn", date: "5 ngày trước" },
+  { user: "Lan Chi", rating: 5, comment: "Mua tặng người yêu, ảnh thích lắm 🥰", date: "1 tuần trước" }
+];
+
+// Lấy dữ liệu từ localStorage hoặc dùng fake ban đầu
+let reviews = JSON.parse(localStorage.getItem(reviewKey)) || defaultReviews;
+
+const reviewList = document.getElementById("reviewList");
+
+function saveReviews() {
+  localStorage.setItem(reviewKey, JSON.stringify(reviews));
+}
+
+function renderReviews(){
+  reviewList.innerHTML = "";
+  let total = 0;
+
+  reviews.forEach(r => {
+    total += r.rating;
+    let stars = "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
+
+    reviewList.innerHTML += `
+      <div class="review-item">
+        <div class="review-user">${r.user} <span style="color:#888;font-size:12px">• ${r.date}</span></div>
+        <div class="review-stars">${stars}</div>
+        <div class="review-text">${r.comment}</div>
+      </div>
+    `;
+  });
+
+  let avg = (total / reviews.length).toFixed(1);
+  document.getElementById("avgRating").innerText = avg;
+  document.getElementById("totalReviews").innerText = `(${reviews.length} đánh giá)`;
+}
+
+function addReview(){
+  let name = document.getElementById("reviewName").value.trim();
+  let rating = parseInt(document.getElementById("reviewRating").value);
+  let comment = document.getElementById("reviewComment").value.trim();
+
+  if(name === "" || comment === ""){
+    alert("Vui lòng nhập tên và nội dung đánh giá");
+    return;
+  }
+
+  let newReview = {
+    user: name,
+    rating: rating,
+    comment: comment,
+    date: "Vừa xong"
+  };
+
+  reviews.unshift(newReview); // thêm lên đầu
+  saveReviews();              // 🔥 lưu lại
+  renderReviews();
+
+  document.getElementById("reviewName").value = "";
+  document.getElementById("reviewComment").value = "";
+}
+
+// Gọi khi load trang
+renderReviews();
+</script>
+
+</body>
+</html>
+

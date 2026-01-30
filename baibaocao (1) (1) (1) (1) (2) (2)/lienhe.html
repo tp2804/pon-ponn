@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Liên hệ - Mai Nguyên Music</title>
+
+<link rel="stylesheet" href="lienhe.css">
+</head>
+
+<body>
+     <button class="back-btn" onclick="history.back()">← Quay lại</button>
+
+<header>📍 LIÊN HỆ - PONPON shop</header>
+
+<div class="map-box">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.8312632701422!2d106.73749770995018!3d10.900425156850845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d83c1116183d%3A0xfa754495eeb43247!2zVHLGsOG7nW5nIFRydW5nIEPhuqVwIEPDtG5nIE5naGnhu4dwIELDrG5oIETGsMahbmc!5e0!3m2!1svi!2s!4v1769148018794!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen=""
+        loading="lazy">
+    </iframe>
+</div>
+
+<div class="contact">
+
+    <div class="box">
+        <h3>📍 Chi Nhánh 1</h3>
+        <p>Số 79 Dt743<br>
+       Bình Hòa, Thuận an<br>
+        TP.HCM</p>
+    </div>
+
+    <div class="box">
+        <h3>📍 Chi Nhánh 2</h3>
+        <p>290 Đường 3/2<br>
+        Phường 12, Quận 10<br>
+        TP.HCM</p>
+    </div>
+
+    <div class="box">
+        <h3>📞 Hotline</h3>
+        <p>098 626 5679</p>
+        <h3>📧 Email</h3>
+        <p>info@ponponmusic.vn</p>
+    </div>
+
+</div>
+
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("footer").innerHTML = html;
+  });
+</script>
+<script src="main.js"></script>
+
+</body>
+</html>

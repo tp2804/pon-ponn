@@ -1,0 +1,258 @@
+/* RESET + BODY */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+/* QUAY VỀ */
+.back-home {
+  text-decoration: none;
+  color: #ff4d6d;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+/* CONTAINER */
+.product-detail {
+  display: flex;
+  gap: 40px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* ẢNH */
+.product-images {
+  flex: 1;
+  text-align: center;
+}
+
+.main-img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* THÔNG TIN */
+.product-info {
+  flex: 1.2;
+}
+
+.product-title {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+/* GIÁ */
+.price-box {
+  margin: 12px 0;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.new-price {
+  color: #e60023;
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.discount {
+  background: #e60023;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* MÔ TẢ */
+.description {
+  margin: 18px 0;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* VOUCHER */
+.voucher-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.voucher {
+  background: #ffe8ec;
+  color: #e60023;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* SỐ LƯỢNG */
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.quantity span {
+  font-weight: 600;
+}
+
+.quantity button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quantity input {
+  width: 42px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+/* THÊM GIỎ */
+.add-cart {
+  flex: 0 0 auto;
+  padding: 12px 18px;
+  background: #f2f2f2;
+  color: #000;
+  border: 1px solid #999;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-cart:hover {
+  background: #e5e5e5;
+}
+
+/* MUA NGAY */
+.buy-now {
+  flex: 1;
+  background: #ff4d6d;
+  border: none;
+  padding: 12px;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.buy-now:hover {
+  background: #e63b5c;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .product-detail {
+    flex-direction: column;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .add-cart,
+  .buy-now {
+    width: 100%;
+  }
+}
+.review-section{
+  margin-top: 40px;
+  background: #fff0f6;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.review-summary{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #e60073;
+}
+
+.review-item{
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.review-user{
+  font-weight: bold;
+}
+
+.review-stars{
+  color: gold;
+  font-size: 14px;
+}
+
+.review-text{
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.review-form{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea{
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.review-form button{
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.review-form button:hover{
+  background: #e60023;
+}

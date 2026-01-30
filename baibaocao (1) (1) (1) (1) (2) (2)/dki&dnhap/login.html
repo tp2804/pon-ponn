@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Đăng nhập</title>
+<link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+
+<a href="../index.html" class="back-to-home">
+    <i class="fa-solid fa-house"></i> Về trang chủ
+</a>
+
+    <div class="wapper">
+        <div class="wapper-heading">
+            <h1>Đăng nhập</h1>
+        </div>
+        <form onsubmit="dangnhap(event)">
+            <div class="input_field">
+                <input id="username" type="text" placeholder="Tên người dùng" />
+            </div>
+
+            <div class="input_field">
+            <input id="password" type="password" placeholder="Mật khẩu" />
+            </div>
+
+            <a href="register.html" class="signup-link">Đăng kí</a>
+            <button id="btn" class="btn">Đăng nhập</button>
+        </form>
+    </div>
+<script src="../js/auth.js"></script>
+
+</body>
+</html>

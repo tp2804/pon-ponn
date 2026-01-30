@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thanh toán</title>
+  <link rel="stylesheet" href="thanhtoan.css">
+</head>
+<body>
+
+  <a href="index.html" class="back-home">← Quay về trang chủ</a>
+<div class="checkout-container">
+
+  <!-- CỘT TRÁI -->
+  <div class="checkout-left">
+    <h2>Thông tin giao hàng</h2>
+    <input type="text" id="fullname" placeholder="Nhập họ và tên">
+      <small id="nameError" style="color:red; display:none;">Tên không hợp lệ</small>
+
+    <input type="text" id="phone" placeholder="Nhập số điện thoại">
+      <small id="phoneError" style="color:red; display:none;">Số điện thoại không hợp lệ</small>
+
+    <input type="text" placeholder="Email (không bắt buộc)">
+    <input type="text" placeholder="Địa chỉ, tên đường">
+    <input type="text" placeholder="Tỉnh/Thành phố">
+     
+<div class="voucher-area">
+  <input type="text" id="voucherInput" class="voucher-box" placeholder="Nhập mã giảm giá">
+  <button type="button" class="apply-btn" onclick="addVoucher()">Áp dụng</button>
+</div>
+
+<div id="appliedVouchers" class="applied-vouchers"></div>
+<p id="voucherMessage"></p>
+
+  
+  <p id="voucherMessage"></p>
+    <h2>Phương thức thanh toán</h2>
+
+    <label class="payment-option">
+      <input type="radio" name="payment" value="cod" checked>
+      Thanh toán khi nhận hàng (COD)
+    </label>
+
+    <label class="payment-option">
+      <input type="radio" name="payment" value="bank">
+      Chuyển khoản ngân hàng (QR)
+    </label>
+
+    <!-- QR BOX (ẩn ban đầu) -->
+    <div id="qrBox" class="qr-box">
+      <h3>Quét mã để chuyển khoản</h3>
+       <img id="qrCode" alt="QR thanh toán">
+<p id="totalAmount"></p>
+
+      <p><b>Nội dung chuyển khoản:</b> THANHTOAN DONHANG</p>
+
+      <button id="paidBtn">Tôi đã chuyển khoản</button>
+    </div>
+
+  </div>
+
+  <!-- CỘT PHẢI -->
+<div class="summary-box">
+  <h3>Tóm tắt yêu cầu</h3>
+
+  <div class="summary-group">
+    <div class="summary-title">
+      <span>Tổng phụ sản phẩm</span>
+      <span id="productTotal">0₫</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Giá gốc</span>
+      <span id="originalPrice">0₫</span>
+    </div>
+
+    <div class="summary-row discount">
+      <span>Giảm giá sản phẩm</span>
+      <span id="productDiscount">-0₫</span>
+    </div>
+
+    <div class="summary-row discount">
+      <span>Voucher</span>
+      <span id="voucherDiscount">-0₫</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="summary-group">
+    <div class="summary-title">
+      <span>Tổng phụ vận chuyển</span>
+      <span id="shipTotal">0₫</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Phí vận chuyển</span>
+      <span id="shipFee">0₫</span>
+    </div>
+
+    <div class="summary-row discount">
+      <span>Giảm phí vận chuyển</span>
+      <span id="shipDiscount">-0₫</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="summary-total">
+    <span>Tổng</span>
+    <b id="finalTotal">0₫</b>
+  </div>
+  <textarea 
+  id="orderNote"
+  class="order-note"
+  placeholder="Ghi chú đơn hàng...">
+</textarea>
+
+</div>
+  <button id="orderBtn" class="order-btn">Đặt hàng</button>
+</div>
+
+<div id="footer"></div>
+<script>
+  const nameInput = document.getElementById("fullname");
+const nameError = document.getElementById("nameError");
+
+nameInput.addEventListener("input", function () {
+  // Chỉ cho chữ cái và khoảng trắng (có hỗ trợ tiếng Việt)
+  this.value = this.value.replace(/[^a-zA-ZÀ-ỹ\s]/g, "");
+});
+
+  const phoneInput = document.getElementById("phone");
+const phoneError = document.getElementById("phoneError");
+
+phoneInput.addEventListener("input", function () {
+  // Xóa ký tự không phải số
+  this.value = this.value.replace(/[^0-9]/g, "").slice(0, 10);
+});
+
+function formatMoney(n){
+  return Number(n).toLocaleString("vi-VN") + "₫";
+}
+
+function getCheckoutItems(){
+  let buyNow = JSON.parse(localStorage.getItem("buyNow"));
+  if(buyNow) return [buyNow];
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+/* ===== ORDER BUTTON ===== */
+document.getElementById("orderBtn").addEventListener("click", function () {
+  const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+  const finalTotalText = document.getElementById("finalTotal").textContent;
+  const finalAmount = finalTotalText.replace(/[₫.]/g, "").trim();
+
+  const orderData = {
+    items: getCheckoutItems(),
+    total: finalTotalText,
+    amountNumber: finalAmount,
+    date: new Date().toLocaleString("vi-VN"),
+    payment: paymentMethod,
+    note: document.getElementById("orderNote").value
+  };
+
+  localStorage.setItem("pendingOrder", JSON.stringify(orderData));
+
+  if (paymentMethod === "cod") {
+    completeOrder();
+  } else {
+    window.location.href = "qr.html";
+  }
+});
+
+function completeOrder() {
+  const orderData = JSON.parse(localStorage.getItem("pendingOrder"));
+
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  orders.push({
+    id: "DH" + Date.now(),
+    ...orderData,
+    status: "Chờ xác nhận"
+  });
+
+  localStorage.setItem("orders", JSON.stringify(orders));
+  localStorage.removeItem("cart");
+  localStorage.removeItem("buyNow");
+  localStorage.removeItem("pendingOrder");
+
+  window.location.href = "camon.html";
+}
+
+/* ===== VOUCHER SYSTEM ===== */
+const VOUCHERS = {
+  "GIAM10K": { type: "product", value: 10000 },
+  "GIAM50K": { type: "product", value: 50000 },
+  "SALE10":  { type: "percent", value: 10 },
+  "FREESHIP": { type: "ship", value: 30000 }
+};
+
+let appliedCodes = [];
+let voucherProductDiscount = 0;
+let voucherShipDiscount = 0;
+
+function addVoucher(){
+  const code = document.getElementById("voucherInput").value.trim().toUpperCase();
+  const messageBox = document.getElementById("voucherMessage");
+
+  if(!VOUCHERS[code]){
+    messageBox.textContent = "❌ Mã không hợp lệ";
+    messageBox.style.color = "red";
+    return;
+  }
+
+  if(appliedCodes.includes(code)){
+    messageBox.textContent = "⚠ Mã đã dùng rồi";
+    messageBox.style.color = "orange";
+    return;
+  }
+
+  appliedCodes.push(code);
+  document.getElementById("voucherInput").value = "";
+  messageBox.textContent = "✔ Thêm mã thành công";
+  messageBox.style.color = "green";
+
+  renderVoucherTags();
+  calculateVoucherDiscount();
+  renderCheckout();
+}
+
+function renderVoucherTags(){
+  const box = document.getElementById("appliedVouchers");
+  box.innerHTML = "";
+
+  appliedCodes.forEach(code=>{
+    box.innerHTML += `
+      <div class="voucher-tag">
+        ${code} <span onclick="removeVoucher('${code}')">✕</span>
+      </div>
+    `;
+  });
+}
+
+function removeVoucher(code){
+  appliedCodes = appliedCodes.filter(c => c !== code);
+  calculateVoucherDiscount();
+  renderVoucherTags();
+  renderCheckout();
+}
+
+function getProductTotal(){
+  const items = getCheckoutItems();
+  let total = 0;
+  items.forEach(item=>{
+    total += item.price * item.quantity;
+  });
+  return total;
+}
+
+function calculateVoucherDiscount(){
+  voucherProductDiscount = 0;
+  voucherShipDiscount = 0;
+
+  let productTotal = getProductTotal();
+
+  appliedCodes.forEach(code=>{
+    const v = VOUCHERS[code];
+    if(v.type === "product") voucherProductDiscount += v.value;
+    if(v.type === "percent") voucherProductDiscount += productTotal * v.value / 100;
+    if(v.type === "ship") voucherShipDiscount += v.value;
+  });
+}
+
+/* ===== RENDER CHECKOUT ===== */
+function renderCheckout(){
+  const items = getCheckoutItems();
+
+  let original = 0;
+  let productTotal = 0;
+
+  items.forEach(item=>{
+    original += item.oldPrice ? item.oldPrice * item.quantity : item.price * item.quantity;
+    productTotal += item.price * item.quantity;
+  });
+
+  let productDiscount = original - productTotal;
+
+  let shipFee = 30000;
+  let shipDiscount = Math.min(shipFee, voucherShipDiscount);
+  let shipTotal = shipFee - shipDiscount;
+
+  let finalTotal = productTotal - voucherProductDiscount + shipTotal;
+
+  document.getElementById("originalPrice").textContent = formatMoney(original);
+  document.getElementById("productTotal").textContent = formatMoney(productTotal);
+  document.getElementById("productDiscount").textContent = "-" + formatMoney(productDiscount);
+  document.getElementById("voucherDiscount").textContent = "-" + formatMoney(voucherProductDiscount);
+  document.getElementById("shipFee").textContent = formatMoney(shipFee);
+  document.getElementById("shipDiscount").textContent = "-" + formatMoney(shipDiscount);
+  document.getElementById("shipTotal").textContent = formatMoney(shipTotal);
+  document.getElementById("finalTotal").textContent = formatMoney(finalTotal);
+}
+
+renderCheckout();
+</script>
+
+
+
+
+
+</body>
+</html>

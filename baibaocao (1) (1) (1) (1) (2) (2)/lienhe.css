@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background:#ffb6c9;
+    color:white;
+}
+
+header {
+    background:#d1338d;
+    padding:15px 40px;
+    font-size:22px;
+}
+
+.map {
+    width:100%;
+    height:450px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.contact {
+    display:flex;
+    justify-content:space-around;
+    padding:40px;
+    background:#ff5f9e;
+    text-align:center;
+}
+
+.box {
+    width:30%;
+}
+
+.box h3 {
+    color:#ffcc00;
+    margin-bottom:10px;
+}
+
+.box p {
+    color:#fff;
+    line-height:1.6;
+}
+
+.map-box {
+    width: 100%;
+    max-width: 1200px;     /* không cho map quá to */
+    margin: 40px auto;    /* canh giữa */
+    border-radius: 20px; /* bo góc */
+    overflow: hidden;    /* cắt góc iframe */
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+/* Google map */
+.map-box iframe {
+    width: 100%;
+    height: 420px;        /* 👈 chỉnh chiều cao ở đây */
+    border: none;
+}
+
+.back-btn {
+    position: fixed;
+    top: 90px;
+    left: 20px;
+    background: #ff5f9e;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 0 10px rgba(255,0,0,0.6);
+}
+
+.back-btn:hover {
+    background: #ff2a2a;
+}
