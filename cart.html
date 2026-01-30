@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giỏ hàng</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+<div class="cart-container">
+
+  <!-- LEFT -->
+  <div class="cart-left">
+    <h2>Giỏ hàng</h2>
+    <div id="cartItems"></div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="cart-right">
+    <h3>Thông tin đơn hàng</h3>
+
+    <div class="summary-row">
+      <span>Tạm tính:</span>
+      <span id="subtotal">0₫</span>
+    </div>
+
+    <div class="summary-row total">
+      <span>Tổng cộng:</span>
+      <span id="total">0₫</span>
+    </div>
+
+    <textarea 
+      id="orderNote" 
+      class="note" 
+      placeholder="Ghi chú đơn hàng...">
+    </textarea>
+
+    <button onclick="goCheckout()" class="checkout-btn">
+      THANH TOÁN NGAY
+    </button>
+
+    <a href="index.html" class="continue">← Tiếp tục mua hàng</a>
+  </div>
+
+</div>
+
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(html => document.getElementById("footer").innerHTML = html);
+</script>
+
+<script src="js/cart.js"></script>
+</body>
+</html>

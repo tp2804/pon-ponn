@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+
+    <a href="../index.html" class="back-to-home">
+    <i class="fa-solid fa-house"></i> Về trang chủ
+</a>
+
+<div class="wapper">
+    <div class="wapper-heading">
+        <h1>Đăng Kí</h1> 
+    </div>
+    <form onsubmit="dangki(event)">
+        <div class="input_field">
+            <input id="username" type="text" placeholder="Tên người dùng" />
+        </div>
+        
+        <div class="input_field">
+            <input id="email" type="text" placeholder="Email" />
+        </div>
+    
+          <div class="input_field">
+            <input id="password" type="password" placeholder="Mật khẩu" />
+        </div>
+
+        <div class="input_field">
+            <input id="avatar" type="text" placeholder="Link ảnh đại diện (URL)">
+        </div>
+
+        <div class="input_field">
+            <input id="confirmpassword" type="password" placeholder="Xác nhận mật khẩu">
+        </div>
+        <a href="login.html" class="login-link">Đăng nhập</a>
+        <button id="btnSignup" class="btn">Đăng kí</button>
+    </form>
+</div>
+
+<script src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #fff2f5;
+}
+
+/* ===== HEADER ===== */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #d1338d;
+    padding: 10px 30px;
+}
+
+
+
+/* TOPBAR KHÔNG BỊ THỤT LỀ */
+.topbar .container{
+    max-width: 100%;
+    margin: 0;
+    padding: 0 20px 0 0; /* bỏ padding trái, giữ phải */
+}
+
+/* Logo sát mép trái hoàn toàn */
+.logo{
+    margin: 0;
+    padding: 0;
+}
+
+.logo img{
+    display: block;
+    margin: 0;
+}
+
+/* Thu nhỏ cụm "Chào user" và đẩy sát góc phải */
+.user-info-container{
+    padding: 4px 10px;
+    transform: scale(0.9);
+    transform-origin: right center;
+}
+
+
+.nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #d1338d;
+    font-weight: bold;
+}
+
+/* ===== CONTAINER CHUNG ===== */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ff5f9e;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #ffb6c9;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* Thanh trên */
+.topbar{
+  background: linear-gradient(to right, #d1338d,#ff5f9e);
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:white;
+}
+
+.topbar nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:bold;
+}
+
+/* Mega menu */
+.mega-menu{
+  position:fixed;
+  top:60px;
+  left:0;
+  width:100%;
+  height:100vh;
+  background:rgba(0,0,0,0.95);
+  display:none;
+  padding:40px;
+  box-sizing:border-box;
+}
+
+.menu-grid{
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap:40px;
+  color:white;
+}
+
+.col h3{
+  margin-bottom:15px;
+  font-size:20px;
+}
+
+.col p{
+  margin:8px 0;
+  color:#ccc;
+  cursor:pointer;
+}
+
+.col p:hover{
+  color:white;
+}
+
+.more{
+  color:#888;
+  font-style:italic;
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:40px;
+  font-size:28px;
+  cursor:pointer;
+  color:white;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px 60px;
+  align-items: flex-start;   /* QUAN TRỌNG */
+  
+}
+
+
+.product-card{
+ 
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  position: relative;
+  text-align: center;
+  font-family: Arial;
+  width: 220px;  /* QUAN TRỌNG — phải có width thì nó mới nằm ngang */
+
+}
+.product-img{
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+}
+
+.product-name{
+  font-size: 14px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.price-box{
+  margin: 6px 0;
+}
+
+.old-price{
+  text-decoration: line-through;
+  color: #999;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.new-price{
+  color: #e60023;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.sale-badge{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: red;
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+.rating{
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.add-cart{
+  background: #ff4d6d;
+  border: none;
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.add-cart:hover{
+  background: #e60023;
+}
+
+@media (max-width: 1024px) {
+  .product-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* Container tổng ở góc màn hình */
+.auth-container {
+    display: flex;
+    align-items: center;
+    
+    padding: 10px 20px;
+}
+
+/* Khối bao quanh sau khi đã đăng nhập */
+.user-info-container {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.15); /* Nền mờ sang trọng */
+    padding: 5px 15px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.user-info-container:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Ảnh đại diện tròn xoe giống ảnh 4 */
+.user-avatar {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 50% !important; /* Làm tròn tuyệt đối */
+    object-fit: cover;
+    margin-right: 10px;
+    border: 2px solid #fff;
+}
+
+/* Chữ Chào... to và rõ */
+.user-name {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+/* Nút thoát nhỏ gọn */
+.logout-btn {
+    color: #ffeb3b !important; /* Màu vàng nổi bật */
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    color: #ff5722 !important; /* Di chuột vào hiện màu cam đỏ */
+}
+
+/* Container chứa cụm nút */
+.auth-buttons-wrapper {
+    display: inline-flex; /* Giữ nó nằm trên cùng hàng với menu */
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px; /* Tạo khoảng cách với Menu/Search cũ */
+}
+
+/* Nút viền xanh theo yêu cầu */
+.btn-blue-outline {
+    text-decoration: none;
+    color: #007bff;
+    border: 2px solid #007bff;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+/* Hiệu ứng hover */
+.btn-blue-outline:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* Khung tài khoản hiện ra sau khi đăng nhập (Viền xanh tròn) */
+.user-logged-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid #007bff;
+    padding: 3px 12px;
+    border-radius: 25px;
+    background: #f0f7ff;
+}
+
+.user-logged-box img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Container chính của Topbar */
+.topbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Đẩy Left sang trái, Right sang phải */
+    padding: 10px 20px;
+}
+
+
+/* Định dạng các chữ Menu, Liên hệ, Giới thiệu */
+.top-menu a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.top-menu a:hover {
+    color: #007bff;
+}
+
+/* Nút Đăng nhập/Đăng ký viền xanh */
+.btn-blue-outline {
+    text-decoration: none;
+    color: #007bff;
+    border: 2px solid #007bff;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+.btn-blue-outline:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* Khung Profile sau khi đăng nhập */
+.user-logged-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid #007bff;
+    padding: 3px 12px;
+    border-radius: 20px;
+}
+
+.search-box {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.search-box input {
+  width: 300px;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+.track-order-btn{
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #ff4d6d;
+}
+
+.track-order-btn:hover{
+  text-decoration: underline;
+}
+
+/* Chia topbar thành 2 cực trái – phải */
+.topbar .container {
+    display: flex;
+    justify-content: space-between; /* logo trái – user phải */
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+}
+
+.logo img {
+    height: 42px;   /* chỉnh to nhỏ tại đây */
+    width: auto;
+    display: block;
+}
+
+/* Khối bên phải topbar */
+.topbar-right {
+   
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info-container {
+    flex: 0 0 auto;
+    margin-left: auto; /* ép sát bên phải */
+    padding: 5px 12px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Avatar nhỏ lại */
+.user-avatar {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
+/* Chữ nhỏ gọn */
+.user-name {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+/* Nút thoát */
+.logout-btn {
+    font-size: 12px;
+}
+.menu-item{
+  position:relative;
+  list-style:none;
+}
+
+.top-menu > ul{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+
+.mega-menu{
+  position:absolute;
+  top:100%;
+  left:0;
+  width:900px;              /* KHÔNG full màn hình nữa */
+  background:#ffd1dc;       /* Hồng nhẹ hơn */
+  padding:25px 30px;
+  display:none;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  z-index:999;
+}
+
+/* Hiện menu khi hover */
+.menu-item:hover .mega-menu{
+  display:block;
+}
+
+/* Chia cột gọn gàng */
+.menu-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cột thay vì dài lê thê */
+  gap:25px 40px;
+}
+
+/* Tiêu đề danh mục */
+.col h3{
+  font-size:16px;
+  margin-bottom:8px;
+  color:#d1338d;
+}
+
+/* Link sản phẩm */
+.col a{
+  display:block;
+  font-size:14px;
+  color:#333;
+  text-decoration:none;
+  margin:4px 0;
+  transition:0.2s;
+}
+
+.col a:hover{
+  color:#d1338d;
+  transform:translateX(3px);
+}
+
+/* Khoảng cách giữa 2 nhóm trong 1 cột */
+.space-top{
+  margin-top:15px;
+}
+
+/* ===================================================
+   FIX TOPBAR THEO BỐ CỤC: TRÁI – GIỮA – PHẢI
+   (OVERRIDE NHẸ – KHÔNG ẢNH HƯỞNG CODE CŨ)
+=================================================== */
+
+/* 1. Chia topbar thành 3 vùng */
+.topbar .container,
+.topbar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+/* 2. Menu ép sát trái */
+.top-menu {
+  display: flex !important;
+  align-items: center;
+  gap: 22px;
+}
+
+/* 3. Ô tìm kiếm ra giữa */
+.topbar .search-box,
+.topbar-center {
+  display: flex;
+  justify-content: center;
+}
+
+.topbar .search-box input,
+.topbar-center input {
+  width: 420px;
+  border-radius: 30px;
+}
+
+/* 4. User ép sát phải */
+.topbar-right,
+.user-info-container {
+  margin-left: auto;
+}
+
+/* 5. Thu gọn user cho giống hình */
+.user-info-container {
+  padding: 6px 12px;
+  border-radius: 30px;
+}
+
+.user-avatar {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.user-name {
+  font-size: 14px;
+}
+
+.logout-btn {
+  font-size: 12px;
+}
+
+/* 6. Responsive nhẹ */
+@media (max-width: 900px) {
+  .topbar .container,
+  .topbar-inner {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .topbar .search-box input {
+    width: 100%;
+  }
+}
+
+/* ===== USER FLOATING ĐẸP ===== */
+.topbar {
+  position: relative;
+}
+
+.user-info-container {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(6px);
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: all 0.25s ease;
+}
+
+.user-info-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   ÉP MEGA MENU KHÔNG FULL – ÔM NỘI DUNG
+========================================= */
+
+/* Khung mega menu */
+.mega-menu {
+  width: auto !important;           /* ❗ bỏ full width */
+  max-width: 1100px;                /* giới hạn chiều ngang */
+  min-height: unset !important;     /* ❗ bỏ chiều cao dư */
+  height: auto !important;
+
+  padding: 16px 24px !important;
+  margin: 0 auto;                   /* canh giữa */
+}
+
+/* Nếu menu đang bị kéo full bằng left/right */
+.mega-menu {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%);
+}
+
+/* Nội dung */
+.mega-menu-content {
+  gap: 12px 24px !important;
+  align-items: flex-start;
+}
+
+/* Cột */
+.mega-menu-column {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Tiêu đề */
+.mega-menu h4 {
+  margin-bottom: 4px !important;
+}
+
+/* Item */
+.mega-menu li {
+  margin-bottom: 2px !important;
+  line-height: 1.3;
+}
